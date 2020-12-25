@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<project name="StreamData" default="war">
+
+    <target name="clean">
+        <delete dir="build/" />
+    </target>
+
+    <path id="compile.classpath">
+        <fileset dir="WebContent/WEB-INF/lib">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+
+    <target name="init">
+        <mkdir dir="build/classes"/>
+        <mkdir dir="build/war" />
+    </target>
+
+    <target name="compile" depends="clean, init" >
+        <javac destdir="build/classes" debug="true" srcdir="src">
+            <classpath refid="compile.classpath"/>
+        </javac>
+    </target>
+
+    <target name="war" depends="compile">
+        <war destfile="build/war/StreamData.war" needxmlfile="false">
+            <fileset dir="WebContent"/>
+            <lib dir="WebContent/WEB-INF/lib"/>
+            <classes dir="build/classes"/>
+        </war>
+    </target>
+
+</project>
