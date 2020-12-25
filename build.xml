@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<project name="StreamData" default="war">
+<project name="Live-Collectl" default="war">
 
     <target name="clean">
         <delete dir="build/" />
