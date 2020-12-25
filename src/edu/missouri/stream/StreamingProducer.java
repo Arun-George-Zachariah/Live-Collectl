@@ -29,7 +29,7 @@ public class StreamingProducer extends TailerListenerAdapter {
         if(!isInitialized) {
             isInitialized = true;
             queue = new ArrayBlockingQueue<String>(2000000000);
-            StreamingConsumer consumer = new StreamingConsumer(queue, allSessions, System.currentTimeMillis());
+            StreamingConsumer consumer = new StreamingConsumer(queue, allSessions);
             new Thread(consumer).start();
         }
     }
