@@ -1,7 +1,7 @@
 package edu.missouri.producer;
 
 import edu.missouri.constants.Constants;
-import edu.missouri.stream.StreamingConsumer;
+import edu.missouri.consumer.StreamingConsumer;
 import org.apache.commons.io.input.TailerListenerAdapter;
 
 import javax.websocket.OnOpen;
@@ -51,7 +51,6 @@ public class StreamingProducer extends TailerListenerAdapter {
                         if(line.startsWith(Constants.HASH)) {
                             header = line.substring(1).split(" ");
                         } else {
-
                             System.out.println(line);
                             break;
                         }
