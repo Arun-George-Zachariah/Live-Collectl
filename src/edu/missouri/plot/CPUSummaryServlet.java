@@ -1,5 +1,7 @@
 package edu.missouri.plot;
 
+import edu.missouri.util.PlotUtil;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,6 +32,7 @@ public class CPUSummaryServlet extends HttpServlet {
 
     protected void doWork(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setHeader("Access-Control-Allow-Origin", "*");
+        PlotUtil.getInstance().getCPUPlot();
         PrintWriter out = response.getWriter();
         out.println("Work in progress");
 
