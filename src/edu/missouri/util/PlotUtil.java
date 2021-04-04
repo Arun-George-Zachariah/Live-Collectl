@@ -9,7 +9,7 @@ import java.io.FileReader;
 public class PlotUtil {
     private static PlotUtil instance = null;
 
-    private PlotUtil {
+    private PlotUtil() {
 
     }
 
@@ -26,7 +26,7 @@ public class PlotUtil {
             while((line = br.readLine()) != null) {
                 if(!line.startsWith(Constants.HASH)) {
                     System.out.println(line);
-                    break
+                    break;
                 }
             }
         } catch (Exception e) {
