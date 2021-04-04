@@ -28,7 +28,7 @@ public class StreamingProducer extends TailerListenerAdapter {
     private void init() {
         if(!isInitialized) {
             isInitialized = true;
-            queue = new ArrayBlockingQueue<String>(2000000000);
+            queue = new ArrayBlockingQueue<String>(2000); // TO-DO: Make the queue size as configurable.
             StreamingConsumer consumer = new StreamingConsumer(queue, allSessions);
             new Thread(consumer).start();
         }
@@ -60,15 +60,6 @@ public class StreamingProducer extends TailerListenerAdapter {
                 System.out.println("StreamingProducer :: streamData ::  Exception :: " + e);
                 e.printStackTrace();
             }
-        }
-    }
-
-    @Override
-    public void handle(String line) {
-        try {
-            queue.put(line);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
     }
 }
