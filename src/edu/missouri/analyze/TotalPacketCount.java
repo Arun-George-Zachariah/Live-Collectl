@@ -43,7 +43,6 @@ public class TotalPacketCount {
                     header = line.substring(1).split(" ");
                 } else {
                     Map<String, String> map = commonUtil.createMap(header, line.split(" "));
-                    System.out.println("Input line map: " + map);
                     Date lineDate = dateFormat.parse(map.get(Constants.DATE_COLUMN));
                     Date lineTime = timeFormat.parse(map.get(Constants.TIME_COLUMN));
 
@@ -78,7 +77,6 @@ public class TotalPacketCount {
                     header = line.substring(1).split(" ");
                 } else {
                     Map<String, String> map = commonUtil.createMap(header, line.split(" "));
-                    System.out.println("Input line map: " + map);
                     Date lineDate = dateFormat.parse(map.get(Constants.DATE_COLUMN));
                     Date lineTime = timeFormat.parse(map.get(Constants.TIME_COLUMN));
 
