@@ -27,8 +27,8 @@ public class TotalPacketCount {
         return instance;
     }
 
-    public Long getTotalPackets(Date startDate, Date startTime, Date endDate, Date endTime, String device) {
-        System.out.println("PacketCounter :: getTotalPackets :: startDate :: " + startDate + " :: startTime :: " + startTime + " :: endDate :: " + endDate + " :: endTime :: " + endTime + " :: device :: " + device);
+    public Long getTotalReceivedPackets(Date startDate, Date startTime, Date endDate, Date endTime, String device) {
+        System.out.println("PacketCounter :: getTotalReceivedPackets :: startDate :: " + startDate + " :: startTime :: " + startTime + " :: endDate :: " + endDate + " :: endTime :: " + endTime + " :: device :: " + device);
         try (BufferedReader br = new BufferedReader(new FileReader(new File(Constants.NETWORK_FILE)))) {
 
             String line = null;
@@ -48,7 +48,8 @@ public class TotalPacketCount {
                     Date lineTime = timeFormat.parse(map.get(Constants.TIME_COLUMN));
 
                     if((lineDate.equals(startDate) || lineDate.after(startDate)) && (lineDate.equals(endDate) || lineDate.before(endDate)) && lineTime.after(startTime) && lineTime.before(endTime)) {
-                        String val = map.get(Constants.SQUARE_OPEN_BRACKET + Constants.NET + Constants.COLON + device + Constants.SQUARE_CLOSE_BRACKET);
+                        System.out.println("key :: " + (Constants.SQUARE_OPEN_BRACKET + Constants.NET + Constants.COLON + device + Constants.SQUARE_CLOSE_BRACKET));
+                        String val = map.get(Constants.SQUARE_OPEN_BRACKET + Constants.NET + Constants.COLON + device + Constants.SQUARE_CLOSE_BRACKET + Constants.RECEIVED_PACKET);
                         System.out.println("val :: " + val);
                     }
                 }

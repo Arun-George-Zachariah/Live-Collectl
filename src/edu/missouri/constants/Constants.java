@@ -20,6 +20,8 @@ public class Constants {
     public static final String COLLECTL_DATE_PATTERN = "yyyyMMdd";
     public static final String COLLECTL_TIME_PATTERN = "HH:mm:ss";
     public static final String NET = "NET";
+    public static final String RECEIVED_PACKET = "RxPkt";
+    public static final String TRANSMITTED_PACKET = "TxPkt";
 
     public static final String DATA_DIR = "/mydata/EVA_Space/Live-Collectl/Data"; // To-Do: Should be read from a conf file.
     public static final String CPU_FILE = DATA_DIR + DIR_SEPARATOR + "vm0-20210322.cpu"; // To-Do: Should be read from a conf file.

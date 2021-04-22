@@ -14,8 +14,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@WebServlet("/PacketCounter")
-public class PacketCounter extends HttpServlet {
+@WebServlet("/RxPacketCounter")
+public class RxPacketCounterServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -48,7 +48,7 @@ public class PacketCounter extends HttpServlet {
 
             String device = request.getParameter(Constants.DEVICE);
 
-            Long count = TotalPacketCount.getInstance().getTotalPackets(startDate, startTime, endDate, endTime, device);
+            Long count = TotalPacketCount.getInstance().getTotalReceivedPackets(startDate, startTime, endDate, endTime, device);
             out.println("Total Packets: " + count);
         } catch(ParseException ex) {
             ex.printStackTrace();
