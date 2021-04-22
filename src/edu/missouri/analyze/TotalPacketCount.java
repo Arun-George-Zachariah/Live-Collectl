@@ -48,7 +48,7 @@ public class TotalPacketCount {
                     Date lineTime = timeFormat.parse(map.get(Constants.TIME_COLUMN));
 
                     if(lineDate.after(startDate) && lineDate.before(endDate) && lineTime.after(startTime) && lineTime.before(endTime)) {
-                        
+                        System.out.println("Valid");
                     }
                 }
             }
