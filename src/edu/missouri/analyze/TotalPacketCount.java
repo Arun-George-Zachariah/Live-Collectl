@@ -28,6 +28,7 @@ public class TotalPacketCount {
     }
 
     public Long getTotalPackets(Date startDate, Date startTime, Date endDate, Date endTime, String device) {
+        System.out.println("PacketCounter :: getTotalPackets :: startDate :: " + startDate + " :: startTime :: " + startTime + " :: endDate :: " + endDate + " :: endTime :: " + endTime + " :: device :: " + device);
         try (BufferedReader br = new BufferedReader(new FileReader(new File(Constants.NETWORK_FILE)))) {
 
             String line = null;
