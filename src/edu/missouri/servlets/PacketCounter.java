@@ -38,9 +38,9 @@ public class PacketCounter extends HttpServlet {
             response.setHeader("Access-Control-Allow-Origin", "*");
             PrintWriter out = response.getWriter();
 
-            SimpleDateFormat dateformat = new SimpleDateFormat(Constants.DATE_PATTERN);
-            Date startDate = dateformat.parse(request.getParameter(Constants.START_DATE));
-            Date endDate = dateformat.parse(request.getParameter(Constants.END_DATE));
+            SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_PATTERN);
+            Date startDate = dateFormat.parse(request.getParameter(Constants.START_DATE));
+            Date endDate = dateFormat.parse(request.getParameter(Constants.END_DATE));
 
             SimpleDateFormat timeFormat = new SimpleDateFormat(Constants.TIME_PATTERN);
             Date startTime = timeFormat.parse(request.getParameter(Constants.START_TIME));

@@ -35,8 +35,8 @@ public class TotalPacketCount {
             String[] header = null;
             Long count = 0L;
 
-            SimpleDateFormat dateformat = new SimpleDateFormat(Constants.COLLECTL_DATE_PATTERN);
-            SimpleDateFormat timeformat = new SimpleDateFormat(Constants.COLLECTL_TIME_PATTERN);
+            SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.COLLECTL_DATE_PATTERN);
+            SimpleDateFormat timeFormat = new SimpleDateFormat(Constants.COLLECTL_TIME_PATTERN);
 
             while((line = br.readLine()) != null) {
                 if(line.startsWith(Constants.HASH)) {
@@ -44,11 +44,11 @@ public class TotalPacketCount {
                 } else {
                     Map<String, String> map = commonUtil.createMap(header, line.split(" "));
                     System.out.println("Input line map: " + map);
-                    Date lineDate = dateformat.parse(map.get(Constants.DATE_COLUMN));
-                    Date lineTime = timeformat.parse(map.get(Constants.TIME_COLUMN));
+                    Date lineDate = dateFormat.parse(map.get(Constants.DATE_COLUMN));
+                    Date lineTime = timeFormat.parse(map.get(Constants.TIME_COLUMN));
 
                     if(lineDate.after(startDate) && lineDate.before(endDate) && lineTime.after(startTime) && lineTime.before(endTime)) {
-
+                        
                     }
                 }
             }
