@@ -5,7 +5,7 @@ public class Constants {
     public static final String HASH = "#";
     public static final String DIR_SEPARATOR = "/";
     public static final String SQUARE_OPEN_BRACKET = "[";
-    public static final String SQUARE_CLOSE_BRACKET = "[";
+    public static final String SQUARE_CLOSE_BRACKET = "]";
     public static final String COLON = ":";
 
     public static final String DATE_COLUMN = "Date";
