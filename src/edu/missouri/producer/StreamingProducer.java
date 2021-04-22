@@ -10,7 +10,6 @@ import javax.websocket.server.ServerEndpoint;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.Set;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
@@ -21,15 +20,14 @@ public class StreamingProducer extends TailerListenerAdapter {
         System.setProperty("log4j.configurationFile", "log4j2.properties");
     }
 
-    private static Set<Session> allSessions;
     private static boolean isInitialized = false;
     private static BlockingQueue<String> queue;
 
-    private void init() {
+    private void init(Session session) {
         if(!isInitialized) {
             isInitialized = true;
             queue = new ArrayBlockingQueue<String>(2000); // TO-DO: Make the queue size as configurable.
-            StreamingConsumer consumer = new StreamingConsumer(queue, allSessions);
+            StreamingConsumer consumer = new StreamingConsumer(queue, session);
             new Thread(consumer).start();
         }
     }
@@ -37,29 +35,22 @@ public class StreamingProducer extends TailerListenerAdapter {
     @OnOpen
     public void streamData(Session session) {
         System.out.println("StreamingProducer :: streamData ::  Start");
-        allSessions = session.getOpenSessions();
-        init();
-        if (allSessions != null && allSessions.size() != 0) {
-            try(BufferedReader br = new BufferedReader(new FileReader(new File(Constants.CPU_FILE)))) {
-                while(true) {
-                    Thread.sleep(10); // TO-DO: Make the refresh rate configurable.
 
-                    String line = null;
-                    String[] header = null;
+        init(session);
 
-                    while((line = br.readLine()) != null) {
-                        if(line.startsWith(Constants.HASH)) {
-                            header = line.substring(1).split(" ");
-                        } else {
-                            System.out.println(line);
-                            break;
-                        }
-                    }
+        try(BufferedReader br = new BufferedReader(new FileReader(new File(Constants.CPU_FILE)))) {
+            while(true) {
+                Thread.sleep(10); // TO-DO: Make the refresh rate configurable.
+
+                String line = null;
+                while((line = br.readLine()) != null) {
+                    queue.put(line);
                 }
-            } catch(Exception e) {
-                System.out.println("StreamingProducer :: streamData ::  Exception :: " + e);
-                e.printStackTrace();
             }
+        } catch(Exception e) {
+            System.out.println("StreamingProducer :: streamData ::  Exception :: " + e);
+            e.printStackTrace();
         }
+
     }
 }
