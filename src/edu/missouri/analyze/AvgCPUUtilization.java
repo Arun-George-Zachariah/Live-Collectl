@@ -27,8 +27,8 @@ public class AvgCPUUtilization {
         return instance;
     }
 
-    public int getAvgCPUUtilization(Date startDate, Date startTime, Date endDate, Date endTime) {
-        System.out.println("AvgCPUUtilization :: getAvgCPUUtilization :: startDate :: " + startDate + " :: startTime :: " + startTime + " :: endDate :: " + endDate + " :: endTime :: " + endTime);
+    public int getAvgCPUUtilization(Date startDate, Date endDate) {
+        System.out.println("AvgCPUUtilization :: getAvgCPUUtilization :: startDate :: " + startDate);
 
         try (BufferedReader br = new BufferedReader(new FileReader(new File(Constants.CPU_FILE)))) {
 
@@ -38,18 +38,16 @@ public class AvgCPUUtilization {
             int total = 0;
             int numOfCPUs = commonUtil.getNoOfCPUs();
 
-            SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.COLLECTL_DATE_PATTERN);
-            SimpleDateFormat timeFormat = new SimpleDateFormat(Constants.COLLECTL_TIME_PATTERN);
+            SimpleDateFormat dateTimeFormat = new SimpleDateFormat(Constants.COLLECTL_DATE_TIME_PATTERN);
 
             while((line = br.readLine()) != null) {
                 if(line.startsWith(Constants.HASH)) {
                     header = line.substring(1).split(Constants.SPACE);
                 } else {
                     Map<String, String> map = commonUtil.createMap(header, line.split(" "));
-                    Date lineDate = dateFormat.parse(map.get(Constants.DATE_COLUMN));
-                    Date lineTime = timeFormat.parse(map.get(Constants.TIME_COLUMN));
+                    Date lineDate = dateTimeFormat.parse(map.get(Constants.DATE_COLUMN) + Constants.SPACE + map.get(Constants.TIME_COLUMN));
 
-                    if((lineDate.equals(startDate) || lineDate.after(startDate)) && (lineDate.equals(endDate) || lineDate.before(endDate)) && lineTime.after(startTime) && lineTime.before(endTime)) {
+                    if((lineDate.equals(startDate) || lineDate.after(startDate)) && (lineDate.equals(endDate) || lineDate.before(endDate))) {
                         for(int i=0; i<numOfCPUs; i++) {
                             String val = map.get(Constants.SQUARE_OPEN_BRACKET + Constants.CPU + Constants.COLON + i + Constants.SQUARE_CLOSE_BRACKET + Constants.USER + Constants.PERCENT);
                             count += Integer.parseInt(val);

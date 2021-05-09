@@ -39,15 +39,11 @@ public class AvgCPUUtilizationServlet extends HttpServlet {
             response.setHeader("Access-Control-Allow-Origin", "*");
             PrintWriter out = response.getWriter();
 
-            SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_PATTERN);
-            Date startDate = dateFormat.parse(request.getParameter(Constants.START_DATE));
-            Date endDate = dateFormat.parse(request.getParameter(Constants.END_DATE));
+            SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.COLLECTL_DATE_TIME_PATTERN);
+            Date startDate = dateFormat.parse(request.getParameter(Constants.START_DATE) + Constants.SPACE + request.getParameter(Constants.START_TIME));
+            Date endDate = dateFormat.parse(request.getParameter(Constants.END_DATE) + Constants.SPACE + request.getParameter(Constants.END_TIME));
 
-            SimpleDateFormat timeFormat = new SimpleDateFormat(Constants.TIME_PATTERN);
-            Date startTime = timeFormat.parse(request.getParameter(Constants.START_TIME));
-            Date endTime = timeFormat.parse(request.getParameter(Constants.END_TIME));
-
-            int count = AvgCPUUtilization.getInstance().getAvgCPUUtilization(startDate, startTime, endDate, endTime);
+            int count = AvgCPUUtilization.getInstance().getAvgCPUUtilization(startDate, endDate);
             out.println("Average CPU Utilization: " + count);
         } catch(ParseException ex) {
             ex.printStackTrace();

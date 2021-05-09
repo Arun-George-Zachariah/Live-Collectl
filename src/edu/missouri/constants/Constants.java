@@ -29,6 +29,7 @@ public class Constants {
     public static final String TRANSMITTED_PACKET = "TxPkt";
     public static final String CPU = "CPU";
     public static final String USER = "User";
+    public static final String COLLECTL_DATE_TIME_PATTERN = "yyyyMMdd HH:mm:ss";
 
     public static final String PROPERTY_FILE = "config.txt";
 
