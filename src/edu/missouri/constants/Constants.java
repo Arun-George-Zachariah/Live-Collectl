@@ -20,10 +20,6 @@ public class Constants {
     public static final String END_DATE = "endDate";
     public static final String END_TIME = "endTime";
     public static final String DEVICE = "device";
-    public static final String DATE_PATTERN = "yyyy-MM-dd";
-    public static final String TIME_PATTERN = "HH:mm";
-    public static final String COLLECTL_DATE_PATTERN = "yyyyMMdd";
-    public static final String COLLECTL_TIME_PATTERN = "HH:mm:ss";
     public static final String NET = "NET";
     public static final String RECEIVED_PACKET = "RxPkt";
     public static final String TRANSMITTED_PACKET = "TxPkt";

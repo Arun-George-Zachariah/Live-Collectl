@@ -38,17 +38,13 @@ public class TxPacketCounterServlet extends HttpServlet {
             response.setHeader("Access-Control-Allow-Origin", "*");
             PrintWriter out = response.getWriter();
 
-            SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_PATTERN);
-            Date startDate = dateFormat.parse(request.getParameter(Constants.START_DATE));
-            Date endDate = dateFormat.parse(request.getParameter(Constants.END_DATE));
-
-            SimpleDateFormat timeFormat = new SimpleDateFormat(Constants.TIME_PATTERN);
-            Date startTime = timeFormat.parse(request.getParameter(Constants.START_TIME));
-            Date endTime = timeFormat.parse(request.getParameter(Constants.END_TIME));
+            SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.REQ_DATE_TIME_PATTERN);
+            Date startDate = dateFormat.parse(request.getParameter(Constants.START_DATE) + Constants.SPACE + request.getParameter(Constants.START_TIME));
+            Date endDate = dateFormat.parse(request.getParameter(Constants.END_DATE) + Constants.SPACE + request.getParameter(Constants.END_TIME));
 
             String device = request.getParameter(Constants.DEVICE);
 
-            Long count = TotalPacketCount.getInstance().getTotalTransmittedPackets(startDate, startTime, endDate, endTime, device);
+            Long count = TotalPacketCount.getInstance().getTotalTransmittedPackets(startDate, endDate, device);
             out.println("Total Packets: " + count);
         } catch(ParseException ex) {
             ex.printStackTrace();
