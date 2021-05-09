@@ -30,7 +30,7 @@ public class Constants {
     public static final String CPU = "CPU";
     public static final String USER = "User";
     public static final String COLLECTL_DATE_TIME_PATTERN = "yyyyMMdd HH:mm:ss";
-    public static final String REQ_DATE_TIME_PATTERN = "yyyyMMdd HH:mm";
+    public static final String REQ_DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm";
 
     public static final String PROPERTY_FILE = "config.txt";
 

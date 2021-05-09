@@ -48,6 +48,7 @@ public class AvgCPUUtilization {
                     Date lineDate = dateTimeFormat.parse(map.get(Constants.DATE_COLUMN) + Constants.SPACE + map.get(Constants.TIME_COLUMN));
 
                     if((lineDate.equals(startDate) || lineDate.after(startDate)) && (lineDate.equals(endDate) || lineDate.before(endDate))) {
+                        System.out.println("map :: " + map);
                         for(int i=0; i<numOfCPUs; i++) {
                             String val = map.get(Constants.SQUARE_OPEN_BRACKET + Constants.CPU + Constants.COLON + i + Constants.SQUARE_CLOSE_BRACKET + Constants.USER + Constants.PERCENT);
                             count += Integer.parseInt(val);
