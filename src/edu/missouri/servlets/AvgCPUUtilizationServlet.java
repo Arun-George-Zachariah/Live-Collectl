@@ -47,7 +47,7 @@ public class AvgCPUUtilizationServlet extends HttpServlet {
             Date startTime = timeFormat.parse(request.getParameter(Constants.START_TIME));
             Date endTime = timeFormat.parse(request.getParameter(Constants.END_TIME));
 
-            Long count = AvgCPUUtilization.getInstance().getAvgCPUUtilization(startDate, startTime, endDate, endTime);
+            int count = AvgCPUUtilization.getInstance().getAvgCPUUtilization(startDate, startTime, endDate, endTime);
             out.println("Average CPU Utilization: " + count);
         } catch(ParseException ex) {
             ex.printStackTrace();
