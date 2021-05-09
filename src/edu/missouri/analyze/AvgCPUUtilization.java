@@ -35,11 +35,10 @@ public class AvgCPUUtilization {
             String line = null;
             String[] header = null;
             Long count = 0L;
+            int numOfCPUs = commonUtil.getNoOfCPUs();
 
             SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.COLLECTL_DATE_PATTERN);
             SimpleDateFormat timeFormat = new SimpleDateFormat(Constants.COLLECTL_TIME_PATTERN);
-
-            commonUtil.getNoOfCPUs();
 
             while((line = br.readLine()) != null) {
                 if(line.startsWith(Constants.HASH)) {
@@ -51,6 +50,11 @@ public class AvgCPUUtilization {
 
                     if((lineDate.equals(startDate) || lineDate.after(startDate)) && (lineDate.equals(endDate) || lineDate.before(endDate)) && lineTime.after(startTime) && lineTime.before(endTime)) {
                         System.out.println("map :: " + map);
+                        for(int i=0; i<numOfCPUs; i++) {
+                            String key = Constants.SQUARE_OPEN_BRACKET + Constants.CPU + Constants.COLON + i + Constants.PERCENT;
+                            System.out.println("Key :: " + key);
+                            map.get(Constants.SQUARE_OPEN_BRACKET + Constants.CPU + Constants.COLON + i + Constants.PERCENT);
+                        }
 //                        String val = map.get(Constants.SQUARE_OPEN_BRACKET + Constants.NET + Constants.COLON + device + Constants.SQUARE_CLOSE_BRACKET + Constants.TRANSMITTED_PACKET);
                     }
                 }
