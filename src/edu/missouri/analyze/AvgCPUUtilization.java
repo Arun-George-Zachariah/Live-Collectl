@@ -29,7 +29,7 @@ public class AvgCPUUtilization {
 
     public Long getAvgCPUUtilization(Date startDate, Date startTime, Date endDate, Date endTime) {
         System.out.println("AvgCPUUtilization :: getAvgCPUUtilization :: startDate :: " + startDate + " :: startTime :: " + startTime + " :: endDate :: " + endDate + " :: endTime :: " + endTime);
-        try (BufferedReader br = new BufferedReader(new FileReader(new File(Constants.NETWORK_FILE)))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(new File(Constants.CPU_FILE)))) {
 
             String line = null;
             String[] header = null;
