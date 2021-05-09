@@ -28,6 +28,7 @@ public class Constants {
     public static final String RECEIVED_PACKET = "RxPkt";
     public static final String TRANSMITTED_PACKET = "TxPkt";
     public static final String CPU = "CPU";
+    public static final String USER = "User";
 
     public static final String PROPERTY_FILE = "config.txt";
 

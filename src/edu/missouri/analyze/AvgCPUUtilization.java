@@ -51,9 +51,10 @@ public class AvgCPUUtilization {
                     if((lineDate.equals(startDate) || lineDate.after(startDate)) && (lineDate.equals(endDate) || lineDate.before(endDate)) && lineTime.after(startTime) && lineTime.before(endTime)) {
                         System.out.println("map :: " + map);
                         for(int i=0; i<numOfCPUs; i++) {
-                            String key = Constants.SQUARE_OPEN_BRACKET + Constants.CPU + Constants.COLON + i + Constants.PERCENT;
-                            System.out.println("Key :: " + key);
-                            map.get(Constants.SQUARE_OPEN_BRACKET + Constants.CPU + Constants.COLON + i + Constants.PERCENT);
+                            String key = Constants.SQUARE_OPEN_BRACKET + Constants.CPU + Constants.COLON + i + Constants.SQUARE_CLOSE_BRACKET + Constants.USER + Constants.PERCENT;
+//                            System.out.println("Key :: " + key);
+                            String val = map.get(Constants.SQUARE_OPEN_BRACKET + Constants.CPU + Constants.COLON + i + Constants.SQUARE_CLOSE_BRACKET + Constants.USER + Constants.PERCENT);
+                            System.out.println("Key :: " + key + " :: val :: " + val);
                         }
 //                        String val = map.get(Constants.SQUARE_OPEN_BRACKET + Constants.NET + Constants.COLON + device + Constants.SQUARE_CLOSE_BRACKET + Constants.TRANSMITTED_PACKET);
                     }
