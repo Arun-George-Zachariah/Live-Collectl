@@ -29,6 +29,7 @@ public class AvgCPUUtilization {
 
     public Long getAvgCPUUtilization(Date startDate, Date startTime, Date endDate, Date endTime) {
         System.out.println("AvgCPUUtilization :: getAvgCPUUtilization :: startDate :: " + startDate + " :: startTime :: " + startTime + " :: endDate :: " + endDate + " :: endTime :: " + endTime);
+
         try (BufferedReader br = new BufferedReader(new FileReader(new File(Constants.CPU_FILE)))) {
 
             String line = null;
@@ -38,9 +39,11 @@ public class AvgCPUUtilization {
             SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.COLLECTL_DATE_PATTERN);
             SimpleDateFormat timeFormat = new SimpleDateFormat(Constants.COLLECTL_TIME_PATTERN);
 
+            commonUtil.getNoOfCPUs();
+
             while((line = br.readLine()) != null) {
                 if(line.startsWith(Constants.HASH)) {
-                    header = line.substring(1).split(" ");
+                    header = line.substring(1).split(Constants.SPACE);
                 } else {
                     Map<String, String> map = commonUtil.createMap(header, line.split(" "));
                     Date lineDate = dateFormat.parse(map.get(Constants.DATE_COLUMN));
@@ -48,6 +51,7 @@ public class AvgCPUUtilization {
 
                     if((lineDate.equals(startDate) || lineDate.after(startDate)) && (lineDate.equals(endDate) || lineDate.before(endDate)) && lineTime.after(startTime) && lineTime.before(endTime)) {
                         System.out.println("map :: " + map);
+//                        String val = map.get(Constants.SQUARE_OPEN_BRACKET + Constants.NET + Constants.COLON + device + Constants.SQUARE_CLOSE_BRACKET + Constants.TRANSMITTED_PACKET);
                     }
                 }
             }
