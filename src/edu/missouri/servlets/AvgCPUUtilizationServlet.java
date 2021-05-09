@@ -39,7 +39,7 @@ public class AvgCPUUtilizationServlet extends HttpServlet {
             response.setHeader("Access-Control-Allow-Origin", "*");
             PrintWriter out = response.getWriter();
 
-            SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.COLLECTL_DATE_TIME_PATTERN);
+            SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.REQ_DATE_TIME_PATTERN);
             Date startDate = dateFormat.parse(request.getParameter(Constants.START_DATE) + Constants.SPACE + request.getParameter(Constants.START_TIME));
             Date endDate = dateFormat.parse(request.getParameter(Constants.END_DATE) + Constants.SPACE + request.getParameter(Constants.END_TIME));
 
