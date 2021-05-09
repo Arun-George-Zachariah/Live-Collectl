@@ -31,19 +31,17 @@ public class CommonUtil {
     }
 
     public static int getNoOfCPUs() {
+        int retVal = 0;
         try (BufferedReader br = new BufferedReader(new FileReader(new File(Constants.CPU_FILE)))) {
-
             String line = null;
-
             while((line = br.readLine()) != null) {
                 if(line.startsWith(Constants.HASH + Constants.SPACE + Constants.SUB_SYS_FIELD)) {
                     String[] splits = line.substring(1).split(Constants.COLON);
                     for(int i=0; i<splits.length; i++) {
-                        System.out.println("splits[i] :: " + splits[i]);
                         if(splits[i].contains(Constants.NO_OF_CPUS_FIELD)) {
-                            String count = splits[i+1].replaceAll("\\D+","");
-                            System.out.println("count::" + count + "::");
-                            return 0;
+                            retVal = Integer.parseInt(splits[i+1].replaceAll("\\D+",""));
+                            System.out.println("CommonUtil :: getNoOfCPUs :: retVal :: " + retVal);
+                            return retVal;
                         }
                     }
 
@@ -53,6 +51,6 @@ public class CommonUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return 0;
+        return retVal;
     }
 }
