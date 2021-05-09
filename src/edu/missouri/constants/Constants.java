@@ -7,6 +7,10 @@ public class Constants {
     public static final String SQUARE_OPEN_BRACKET = "[";
     public static final String SQUARE_CLOSE_BRACKET = "]";
     public static final String COLON = ":";
+    public static final String SPACE = " ";
+
+    public static final String SUB_SYS_FIELD = "SubSys";
+    public static final String NO_OF_CPUS_FIELD = "NumCPUs";
 
     public static final String DATE_COLUMN = "Date";
     public static final String TIME_COLUMN = "Time";
