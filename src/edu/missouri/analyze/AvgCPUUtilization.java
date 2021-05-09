@@ -27,14 +27,15 @@ public class AvgCPUUtilization {
         return instance;
     }
 
-    public Long getAvgCPUUtilization(Date startDate, Date startTime, Date endDate, Date endTime) {
+    public int getAvgCPUUtilization(Date startDate, Date startTime, Date endDate, Date endTime) {
         System.out.println("AvgCPUUtilization :: getAvgCPUUtilization :: startDate :: " + startDate + " :: startTime :: " + startTime + " :: endDate :: " + endDate + " :: endTime :: " + endTime);
 
         try (BufferedReader br = new BufferedReader(new FileReader(new File(Constants.CPU_FILE)))) {
 
             String line = null;
             String[] header = null;
-            Long count = 0L;
+            int count = 0;
+            int total = 0;
             int numOfCPUs = commonUtil.getNoOfCPUs();
 
             SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.COLLECTL_DATE_PATTERN);
@@ -49,23 +50,22 @@ public class AvgCPUUtilization {
                     Date lineTime = timeFormat.parse(map.get(Constants.TIME_COLUMN));
 
                     if((lineDate.equals(startDate) || lineDate.after(startDate)) && (lineDate.equals(endDate) || lineDate.before(endDate)) && lineTime.after(startTime) && lineTime.before(endTime)) {
-                        System.out.println("map :: " + map);
                         for(int i=0; i<numOfCPUs; i++) {
-                            String key = Constants.SQUARE_OPEN_BRACKET + Constants.CPU + Constants.COLON + i + Constants.SQUARE_CLOSE_BRACKET + Constants.USER + Constants.PERCENT;
-//                            System.out.println("Key :: " + key);
                             String val = map.get(Constants.SQUARE_OPEN_BRACKET + Constants.CPU + Constants.COLON + i + Constants.SQUARE_CLOSE_BRACKET + Constants.USER + Constants.PERCENT);
-                            System.out.println("Key :: " + key + " :: val :: " + val);
+                            count += Integer.parseInt(val);
                         }
-//                        String val = map.get(Constants.SQUARE_OPEN_BRACKET + Constants.NET + Constants.COLON + device + Constants.SQUARE_CLOSE_BRACKET + Constants.TRANSMITTED_PACKET);
+                        total += 1;
                     }
                 }
             }
 
-            System.out.println("PacketCounter :: getTotalReceivedPackets :: count :: " + count);
-            return count;
+            int avgVal = count/total;
+            System.out.println("AvgCPUUtilization :: getAvgCPUUtilization :: avgVal :: " + avgVal);
+
+            return avgVal;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return -1L;
+        return -1;
     }
 }
