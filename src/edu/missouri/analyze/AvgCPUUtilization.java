@@ -47,7 +47,7 @@ public class AvgCPUUtilization {
                     Date lineTime = timeFormat.parse(map.get(Constants.TIME_COLUMN));
 
                     if((lineDate.equals(startDate) || lineDate.after(startDate)) && (lineDate.equals(endDate) || lineDate.before(endDate)) && lineTime.after(startTime) && lineTime.before(endTime)) {
-                        System.out.println("map :: " + map)
+                        System.out.println("map :: " + map);
                     }
                 }
             }
